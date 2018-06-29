@@ -1,4 +1,4 @@
-#How to install NGINXCP + Pagespeed on cPanel 
+##How to install NGINXCP + Pagespeed on cPanel##
 
 Clone Repository
    ```git clone https://github.com/geek-id/nginxcp_pagespeed.git``` 
