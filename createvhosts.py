@@ -53,18 +53,18 @@ def writeconfded(user, domain, docroot, passedip, alias):
           location / {
 	  error_page 405 = @backend;
           add_header X-Cache "HIT from Backend";
-          proxy_pass http://%s:8081;
+          proxy_pass http://%s:8080;
           include proxy.inc;
 	  include microcache.inc;          
 	  }
           location @backend {
           internal;
-          proxy_pass http://%s:8081;
+          proxy_pass http://%s:8080;
           include proxy.inc;
 	  include microcache.inc;
           }
           location ~ .*\.(php|jsp|cgi|pl|py)?$ {
-          proxy_pass http://%s:8081;
+          proxy_pass http://%s:8080;
           include proxy.inc;
           include microcache.inc;
 	  }
@@ -114,18 +114,18 @@ def writeconfshared(user,domain,docroot,passedip, alias):
           location / {
 	  error_page 405 = @backend;
           add_header X-Cache "HIT from Backend";
-          proxy_pass http://%s:8081;
+          proxy_pass http://%s:8080;
           include proxy.inc;
 	  include microcache.inc;
           }
           location @backend {
           internal;
-          proxy_pass http://%s:8081;
+          proxy_pass http://%s:8080;
           include proxy.inc;
 	  include microcache.inc;
           }
           location ~ .*\.(php|jsp|cgi|pl|py)?$ {
-          proxy_pass http://%s:8081;
+          proxy_pass http://%s:8080;
           include proxy.inc;
 	  include microcache.inc;
           }
