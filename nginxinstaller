@@ -170,6 +170,9 @@ print "Please Wait ......."
 proc = subprocess.Popen("mkdir -p /usr/local/cpanel/hooks/addondomain > /dev/null 2>&1", shell=True)
 output = proc.communicate()
 
+proc = subprocess.Popen("mkdir -p /var/ngx_pagespeed_cache > /dev/null 2>&1", shell=True)
+output = proc.communicate()
+
 proc = subprocess.Popen("cp /" + currentdir + "/addaddondomain /usr/local/cpanel/hooks/addondomain > /dev/null 2>&1", shell=True)
 output = proc.communicate()
 proc = subprocess.Popen("chmod +x /usr/local/cpanel/hooks/addondomain/addaddondomain > /dev/null 2>&1", shell=True)
