@@ -28,5 +28,5 @@ Add the following cron job to the end of line list <br/>
 ```0 */1 * * * /usr/sbin/tmpwatch -am 1 /tmp/nginx_client```<br/>
 
 
-Regards,
+Regards,<br/>
 Geek-ID
