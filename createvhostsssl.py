@@ -82,9 +82,8 @@ def writeconfded(user, domain, docroot, passedip, alias):
         domain = domain
         passedip = passedip
         dedipvhost = """server {
-          error_log /var/log/nginx/vhost-error_log warn;
+          error_log %s/error_log warn;
           listen %s:443 ssl;
-          listen [::]:443 ssl;
 	  server_name %s %s %s;
           access_log /usr/local/apache/domlogs/%s bytes_log;
           access_log /usr/local/apache/domlogs/%s combined;
@@ -137,7 +136,7 @@ def writeconfded(user, domain, docroot, passedip, alias):
           location ~ /\.ht {
           deny all;
           }
-        }""" % (passedip, domain, alias, passedip, wildcard_safe(domain) + "-bytes_log", wildcard_safe(domain), docroot, domain, domain, passedip, passedip, passedip)
+        }""" % (docroot, passedip, domain, alias, passedip, wildcard_safe(domain) + "-bytes_log", wildcard_safe(domain), docroot, domain, domain, passedip, passedip, passedip)
         if not os.path.exists( '/etc/nginx/vhosts'):
                 os.makedirs('/etc/nginx/vhosts')
         if os.path.exists( '/etc/nginx/staticvhosts/' + domain + '.ssl'):
@@ -211,7 +210,7 @@ def writeconfshared(user,domain,docroot,passedip, alias):
             ssl_crt.close
 
         sharedipvhost = """server {
-          error_log /var/log/nginx/vhost-error_log warn;
+          error_log %s/error_log warn;
           listen %s:443 ssl;
 	  server_name %s %s;
           access_log /usr/local/apache/domlogs/%s bytes_log;
@@ -271,7 +270,7 @@ def writeconfshared(user,domain,docroot,passedip, alias):
           location ~ /\.ht {
           deny all;
           }
-        }""" % (passedip, domain, alias, wildcard_safe(domain) + "-bytes_log", wildcard_safe(domain), docroot, domain, domain, passedip, passedip, passedip)
+        }""" % (docroot, passedip, domain, alias, wildcard_safe(domain) + "-bytes_log", wildcard_safe(domain), docroot, domain, domain, passedip, passedip, passedip)
         if not os.path.exists( '/etc/nginx/vhosts'):
                 os.makedirs('/etc/nginx/vhosts')
         if os.path.exists( '/etc/nginx/staticvhosts/' + domain + '.ssl'):

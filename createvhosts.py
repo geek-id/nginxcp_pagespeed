@@ -21,7 +21,7 @@ def writeconfded(user, domain, docroot, passedip, alias):
         domain = domain
         passedip = passedip
         dedipvhost = """server {
-          error_log /var/log/nginx/vhost-error_log warn;
+          error_log %s/error_log warn;
           listen %s:80;
           listen [::]:80;
 	  server_name %s %s %s;
@@ -71,7 +71,7 @@ def writeconfded(user, domain, docroot, passedip, alias):
           location ~ /\.ht {
           deny all;
           }
-        }""" % (passedip, domain, alias, passedip, wildcard_safe(domain) + "-bytes_log", wildcard_safe(domain), docroot, passedip, passedip, passedip)
+        }""" % (docroot, passedip, domain, alias, passedip, wildcard_safe(domain) + "-bytes_log", wildcard_safe(domain), docroot, passedip, passedip, passedip)
         if not os.path.exists( '/etc/nginx/vhosts'):
                 os.makedirs('/etc/nginx/vhosts')
         if os.path.exists( '/etc/nginx/staticvhosts/' + domain):
@@ -83,7 +83,7 @@ def writeconfded(user, domain, docroot, passedip, alias):
 
 def writeconfshared(user,domain,docroot,passedip, alias):
         sharedipvhost = """server {
-          error_log /var/log/nginx/vhost-error_log warn;
+          error_log %s/error_log warn;
           listen %s:80;
           listen [::]:80;
 	  server_name %s %s;
@@ -132,7 +132,7 @@ def writeconfshared(user,domain,docroot,passedip, alias):
           location ~ /\.ht {
           deny all;
           }
-        }""" % (passedip, domain, alias, wildcard_safe(domain) + "-bytes_log", wildcard_safe(domain), docroot, passedip, passedip, passedip)
+        }""" % (docroot, passedip, domain, alias, wildcard_safe(domain) + "-bytes_log", wildcard_safe(domain), docroot, passedip, passedip, passedip)
         if not os.path.exists( '/etc/nginx/vhosts'):
                 os.makedirs('/etc/nginx/vhosts')
         if os.path.exists( '/etc/nginx/staticvhosts/' + domain):
