@@ -1,25 +1,32 @@
-# **How to install NGINXCP + Pagespeed on cPanel**
+# **NginCP + SSL + Pagespeed**
 
-Clone Repository
-```git clone https://github.com/geek-id/nginxcp_pagespeed.git``` 
+This repository modification of NginxCP.
+What feature modification ?
+- Enable SSL on NginxCP
+- Add module Pagespeed on NginxCP
 
-Open folder nginxcp_pagespeed
-```cd nginxcp_pagespeed```
+**How to install:**
 
-Generate Remote Access Key
-```/script/convert_acceshash_to_token```
- 
-Running installer nginxcp
-```./nginxinstaller install```
+1. Clone Repository<br/>
+```git clone https://github.com/geek-id/nginxcp_pagespeed.git``` <br/>
 
-Restart web server
-```systemctl restart httpd```
+2. Open folder nginxcp_pagespeed<br/>
+```cd nginxcp_pagespeed```<br/>
 
-Register the plugin with cPanel
-```/usr/local/cpanel/bin/register_appconfig /var/cpanel/apps/nginxcp.conf```
+3. Running installer nginxcp<br/>
+```./nginx-installer.py```<br/>
 
-Setting up cron job to clean up temporary files
-```crontab -e -u root```
+4. Restart web server <br/>
+```systemctl restart httpd```<br/>
 
-Add the following cron job to the end of line list
-```0 */1 * * * /usr/sbin/tmpwatch -am 1 /tmp/nginx_client```
+5. Register the plugin nginxcp on cPanel <br/>
+```/usr/local/cpanel/bin/register_appconfig /var/cpanel/apps/nginxcp.conf```<br/>
+
+6. Setting up cron job to clean up temporary files <br/>
+```crontab -e -u root```<br/>
+Add the following cron job to the end of line list <br/>
+```0 */1 * * * /usr/sbin/tmpwatch -am 1 /tmp/nginx_client```<br/>
+
+
+Regards,
+Geek-ID
