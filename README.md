@@ -1,4 +1,4 @@
-# **NginCP + SSL + Pagespeed**
+# **NginxCP + SSL + Pagespeed**
 
 This repository modification of NginxCP.
 What feature modification ?
