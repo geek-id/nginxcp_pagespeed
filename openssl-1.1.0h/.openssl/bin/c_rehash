@@ -13,7 +13,7 @@
 # and add symbolic links to their hash values.
 
 my $dir = ;
-my $prefix = /root/installer/publicnginx/nginx-1.14.0/../openssl-1.1.0h/.openssl;
+my $prefix = /root/installer/publicnginx/openssl-1.1.0h/.openssl;
 
 my $errorcount = 0;
 my $openssl = $ENV{OPENSSL} || "openssl";

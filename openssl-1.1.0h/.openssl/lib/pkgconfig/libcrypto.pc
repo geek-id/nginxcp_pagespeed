@@ -1,4 +1,4 @@
-prefix=/root/installer/publicnginx/nginx-1.14.0/../openssl-1.1.0h/.openssl
+prefix=/root/installer/publicnginx/openssl-1.1.0h/.openssl
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

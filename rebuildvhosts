@@ -6,6 +6,6 @@
 #
 rm -rf /etc/nginx/vhosts
 /scripts/createvhosts.py
+/scripts/createvhostsssl.py
 systemctl restart httpd
 echo "Regenerate vhosts completed"
-

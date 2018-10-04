@@ -25,7 +25,16 @@ libpcre_la-pcre_jit_compile.lo: pcre_jit_compile.c \
  /usr/include/bits/stdlib-float.h /usr/include/string.h \
  /usr/include/bits/string.h /usr/include/bits/string2.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
- /usr/include/stdint.h /usr/include/bits/wchar.h pcre.h ucp.h
+ /usr/include/stdint.h /usr/include/bits/wchar.h pcre.h ucp.h \
+ sljit/sljitLir.c sljit/sljitLir.h sljit/sljitConfig.h \
+ sljit/sljitConfigInternal.h sljit/sljitUtils.c /usr/include/pthread.h \
+ /usr/include/sched.h /usr/include/bits/sched.h \
+ /usr/include/bits/setjmp.h /usr/include/sys/mman.h \
+ /usr/include/bits/mman.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+ /usr/include/bits/confname.h /usr/include/getopt.h \
+ sljit/sljitExecAllocator.c sljit/sljitNativeX86_common.c \
+ sljit/sljitNativeX86_64.c
 
 /usr/include/stdc-predef.h:
 
@@ -132,3 +141,41 @@ pcre_internal.h:
 pcre.h:
 
 ucp.h:
+
+sljit/sljitLir.c:
+
+sljit/sljitLir.h:
+
+sljit/sljitConfig.h:
+
+sljit/sljitConfigInternal.h:
+
+sljit/sljitUtils.c:
+
+/usr/include/pthread.h:
+
+/usr/include/sched.h:
+
+/usr/include/bits/sched.h:
+
+/usr/include/bits/setjmp.h:
+
+/usr/include/sys/mman.h:
+
+/usr/include/bits/mman.h:
+
+/usr/include/unistd.h:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/environments.h:
+
+/usr/include/bits/confname.h:
+
+/usr/include/getopt.h:
+
+sljit/sljitExecAllocator.c:
+
+sljit/sljitNativeX86_common.c:
+
+sljit/sljitNativeX86_64.c:

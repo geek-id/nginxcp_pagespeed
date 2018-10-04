@@ -33,10 +33,11 @@ def writeconfded(user, domain, docroot, passedip, alias):
           pagespeed FileCachePath /var/ngx_pagespeed_cache;
           pagespeed RewriteLevel CoreFilters;
           pagespeed EnableFilters collapse_whitespace,remove_comments,extend_cache,combine_css,combine_javascript;
+	  pagespeed EnableFilters convert_png_to_jpeg;	  
 
           location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" {
-      add_header "" "";
-      }
+             add_header "" "";
+          }
 
           location ~ "^/ngx_pagespeed_static/" { }
           location ~ "^/ngx_pagespeed_beacon$" { }
@@ -47,29 +48,38 @@ def writeconfded(user, domain, docroot, passedip, alias):
 
           #location / {
           location ~*.*\.(3gp|gif|jpg|jpeg|png|ico|wmv|avi|asf|asx|mpg|mpeg|mp4|pls|mp3|mid|wav|swf|flv|html|htm|txt|js|css|exe|zip|tar|rar|gz|tgz|bz2|uha|7z|doc|docx|xls|xlsx|pdf|iso)$ {
-          expires 1M;
-          try_files $uri @backend;
+             expires 1M;
+             try_files $uri @backend;
           }
+
           location / {
-	  error_page 405 = @backend;
-          add_header X-Cache "HIT from Backend";
-          proxy_pass http://%s:8080;
-          include proxy.inc;
-	  include microcache.inc;          
+	     error_page 405 = @backend;
+             add_header X-Cache "HIT from Backend";
+             proxy_pass http://%s:8080;
+             include proxy.inc;
+	     include microcache.inc;          
 	  }
+
           location @backend {
-          internal;
-          proxy_pass http://%s:8080;
-          include proxy.inc;
-	  include microcache.inc;
+             internal;
+             proxy_pass http://%s:8080;
+             include proxy.inc;
+	     include microcache.inc;
           }
+          
           location ~ .*\.(php|jsp|cgi|pl|py)?$ {
-          proxy_pass http://%s:8080;
-          include proxy.inc;
-          include microcache.inc;
+             proxy_pass http://%s:8080;
+             include proxy.inc;
+             include microcache.inc;
 	  }
+          
           location ~ /\.ht {
-          deny all;
+             deny all;
+          }
+
+          location /xmlrpc.php {
+             #allow   192.168.1.0/24;
+             deny all;
           }
         }""" % (docroot, passedip, domain, alias, passedip, wildcard_safe(domain) + "-bytes_log", wildcard_safe(domain), docroot, passedip, passedip, passedip)
         if not os.path.exists( '/etc/nginx/vhosts'):
@@ -94,6 +104,7 @@ def writeconfshared(user,domain,docroot,passedip, alias):
           pagespeed FileCachePath /var/ngx_pagespeed_cache;
           pagespeed RewriteLevel CoreFilters;
           pagespeed EnableFilters collapse_whitespace,remove_comments,extend_cache,combine_css,combine_javascript;
+          pagespeed EnableFilters convert_png_to_jpeg;
 
           location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" {
       add_header "" "";

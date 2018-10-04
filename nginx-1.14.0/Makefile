@@ -2,16 +2,16 @@
 default:	build
 
 clean:
-	rm -rf Makefile objs
+	rm -rf Makefile nginx-1.14.0
 
 build:
-	$(MAKE) -f objs/Makefile
+	$(MAKE) -f nginx-1.14.0/Makefile
 
 install:
-	$(MAKE) -f objs/Makefile install
+	$(MAKE) -f nginx-1.14.0/Makefile install
 
 modules:
-	$(MAKE) -f objs/Makefile modules
+	$(MAKE) -f nginx-1.14.0/Makefile modules
 
 upgrade:
 	/usr/local/sbin -t

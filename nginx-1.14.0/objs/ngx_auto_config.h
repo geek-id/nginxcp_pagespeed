@@ -1,4 +1,4 @@
-#define NGX_CONFIGURE " --with-http_flv_module --with-ipv6 --with-http_mp4_module --with-pcre=/root/installer/publicnginx/pcre-8.35 --add-module=../ngx_pagespeed --sbin-path=/usr/local/sbin --conf-path=/etc/nginx/nginx.conf --pid-path=/var/run/nginx.pid --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --with-http_realip_module --with-http_ssl_module --http-client-body-temp-path=/tmp/nginx_client --http-proxy-temp-path=/tmp/nginx_proxy --http-fastcgi-temp-path=/tmp/nginx_fastcgi --with-http_stub_status_module"
+#define NGX_CONFIGURE " --with-http_flv_module --with-ipv6 --with-http_mp4_module --with-pcre=/root/installer/publicnginx/pcre-8.42 --with-openssl=../openssl-1.1.0h --with-zlib=../zlib-1.2.11 --add-module=../nginx-1.14.0/src/http/modules/ngx_pagespeed --sbin-path=/usr/local/sbin --conf-path=/etc/nginx/nginx.conf --pid-path=/var/run/nginx.pid --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --with-file-aio --with-threads --with-poll_module --with-select_module --with-http_addition_module --with-http_image_filter_module=dynamic --with-http_dav_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_auth_request_module --with-http_random_index_module --with-http_secure_link_module --with-http_geoip_module=dynamic --with-http_sub_module --with-http_realip_module --with-http_v2_module --with-http_ssl_module --http-client-body-temp-path=/tmp/nginx_client --http-proxy-temp-path=/tmp/nginx_proxy --with-http_degradation_module --with-http_slice_module --http-fastcgi-temp-path=/tmp/nginx_fastcgi --with-http_stub_status_module"
 
 #ifndef NGX_COMPILER
 #define NGX_COMPILER  "gcc 4.8.5 20150623 (Red Hat 4.8.5-28) (GCC) "
@@ -173,6 +173,11 @@
 #endif
 
 
+#ifndef NGX_HAVE_FILE_AIO
+#define NGX_HAVE_FILE_AIO  1
+#endif
+
+
 #ifndef NGX_HAVE_EVENTFD
 #define NGX_HAVE_EVENTFD  1
 #endif
@@ -343,6 +348,21 @@
 #endif
 
 
+#ifndef NGX_THREADS
+#define NGX_THREADS  1
+#endif
+
+
+#ifndef NGX_HAVE_SELECT
+#define NGX_HAVE_SELECT  1
+#endif
+
+
+#ifndef NGX_HAVE_POLL
+#define NGX_HAVE_POLL  1
+#endif
+
+
 #ifndef NGX_HTTP_CACHE
 #define NGX_HTTP_CACHE  1
 #endif
@@ -355,6 +375,31 @@
 
 #ifndef NGX_HTTP_SSI
 #define NGX_HTTP_SSI  1
+#endif
+
+
+#ifndef NGX_HTTP_GZIP
+#define NGX_HTTP_GZIP  1
+#endif
+
+
+#ifndef NGX_HTTP_V2
+#define NGX_HTTP_V2  1
+#endif
+
+
+#ifndef NGX_HTTP_HEADERS
+#define NGX_HTTP_HEADERS  1
+#endif
+
+
+#ifndef NGX_HTTP_GZIP
+#define NGX_HTTP_GZIP  1
+#endif
+
+
+#ifndef NGX_HTTP_DAV
+#define NGX_HTTP_DAV  1
 #endif
 
 
@@ -378,6 +423,11 @@
 #endif
 
 
+#ifndef NGX_HTTP_X_FORWARDED_FOR
+#define NGX_HTTP_X_FORWARDED_FOR  1
+#endif
+
+
 #ifndef NGX_HTTP_SSL
 #define NGX_HTTP_SSL  1
 #endif
@@ -388,6 +438,11 @@
 #endif
 
 
+#ifndef NGX_HTTP_DEGRADATION
+#define NGX_HTTP_DEGRADATION  1
+#endif
+
+
 #ifndef NGX_HTTP_UPSTREAM_ZONE
 #define NGX_HTTP_UPSTREAM_ZONE  1
 #endif
@@ -395,115 +450,5 @@
 
 #ifndef NGX_STAT_STUB
 #define NGX_STAT_STUB  1
-#endif
-
-
-#ifndef NGX_PAGESPEED
-#define NGX_PAGESPEED  1
-#endif
-
-
-#ifndef NGX_PCRE
-#define NGX_PCRE  1
-#endif
-
-
-#ifndef NGX_OPENSSL
-#define NGX_OPENSSL  1
-#endif
-
-
-#ifndef NGX_SSL
-#define NGX_SSL  1
-#endif
-
-
-#ifndef NGX_ZLIB
-#define NGX_ZLIB  1
-#endif
-
-
-#ifndef NGX_PREFIX
-#define NGX_PREFIX  "/usr/local/nginx/"
-#endif
-
-
-#ifndef NGX_CONF_PREFIX
-#define NGX_CONF_PREFIX  "/etc/nginx/"
-#endif
-
-
-#ifndef NGX_SBIN_PATH
-#define NGX_SBIN_PATH  "/usr/local/sbin"
-#endif
-
-
-#ifndef NGX_CONF_PATH
-#define NGX_CONF_PATH  "/etc/nginx/nginx.conf"
-#endif
-
-
-#ifndef NGX_PID_PATH
-#define NGX_PID_PATH  "/var/run/nginx.pid"
-#endif
-
-
-#ifndef NGX_LOCK_PATH
-#define NGX_LOCK_PATH  "logs/nginx.lock"
-#endif
-
-
-#ifndef NGX_ERROR_LOG_PATH
-#define NGX_ERROR_LOG_PATH  "/var/log/nginx/error.log"
-#endif
-
-
-#ifndef NGX_HTTP_LOG_PATH
-#define NGX_HTTP_LOG_PATH  "/var/log/nginx/access.log"
-#endif
-
-
-#ifndef NGX_HTTP_CLIENT_TEMP_PATH
-#define NGX_HTTP_CLIENT_TEMP_PATH  "/tmp/nginx_client"
-#endif
-
-
-#ifndef NGX_HTTP_PROXY_TEMP_PATH
-#define NGX_HTTP_PROXY_TEMP_PATH  "/tmp/nginx_proxy"
-#endif
-
-
-#ifndef NGX_HTTP_FASTCGI_TEMP_PATH
-#define NGX_HTTP_FASTCGI_TEMP_PATH  "/tmp/nginx_fastcgi"
-#endif
-
-
-#ifndef NGX_HTTP_UWSGI_TEMP_PATH
-#define NGX_HTTP_UWSGI_TEMP_PATH  "uwsgi_temp"
-#endif
-
-
-#ifndef NGX_HTTP_SCGI_TEMP_PATH
-#define NGX_HTTP_SCGI_TEMP_PATH  "scgi_temp"
-#endif
-
-
-#ifndef NGX_SUPPRESS_WARN
-#define NGX_SUPPRESS_WARN  1
-#endif
-
-
-#ifndef NGX_SMP
-#define NGX_SMP  1
-#endif
-
-
-#ifndef NGX_USER
-#define NGX_USER  "nobody"
-#endif
-
-
-#ifndef NGX_GROUP
-#define NGX_GROUP  "nobody"
 #endif
 

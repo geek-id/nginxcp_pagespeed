@@ -65,6 +65,7 @@ if len(sys.argv) > 1:
         	subprocess.Popen("rm -f /scripts/postwwwacct", shell=True)
         	subprocess.Popen("rm -f /scripts/iplist.py", shell=True)
         	subprocess.Popen("rm -f /scripts/createvhosts.py", shell=True)
+        	subprocess.Popen("rm -f /scripts/createvhostsssl.py", shell=True)
 		subprocess.Popen("rm -f /scripts/rebuildvhosts", shell=True)
 	       	subprocess.Popen("rm -f /scripts/xmlapi.py", shell=True)
                 subprocess.Popen("rm -f /scripts/after_apache_make_install", shell=True)
@@ -80,12 +81,12 @@ if len(sys.argv) > 1:
 		subprocess.Popen("rm -f /usr/local/cpanel/whostmgr/docroot/cgi/addon_nginx.cgi", shell=True)
         	subprocess.Popen("rm -f /usr/local/cpanel/whostmgr/docroot/cgi/nginx.php", shell=True)
         	subprocess.Popen("rm -f /usr/local/cpanel/whostmgr/docroot/cgi/config.png", shell=True)
-       		subprocess.Popen("rm -f /usr/local/cpanel/whostmgr/docroot/cgi/cleanup.gif", shell=True)	
+       		subprocess.Popen("rm -f /usr/local/cpanel/whostmgr/docroot/cgi/cleanup.gif", shell=True)
         	subprocess.Popen("rm -f /usr/local/cpanel/whostmgr/docroot/cgi/log.png", shell=True)
         	subprocess.Popen("rm -f /usr/local/cpanel/whostmgr/docroot/cgi/rebuild.png", shell=True)
         	subprocess.Popen("rm -f /usr/local/cpanel/whostmgr/docroot/cgi/restartservices.gif", shell=True)
 		subprocess.Popen("rm -f /var/cpanel/apps/nginxcp.conf", shell=True)
-		
+
 		subprocess.Popen("/usr/local/cpanel/bin/register_hooks > /dev/null 2>&1", shell=True)
                 subprocess.Popen("sed -i 's/=8081/=80/g' /etc/chkserv.d/httpd", shell=True)
 		proc = subprocess.Popen("sed -i 's/apache_port=0.0.0.0:8081/apache_port=0.0.0.0:80/' /var/cpanel/cpanel.config", shell=True)
@@ -124,8 +125,8 @@ if len(sys.argv) > 1:
 		sys.exit()
 	elif sys.argv[1] == "install":
 		pass
-	else:	
-		print "Usage ./nginstaller [install | uninstall]" 
+	else:
+		print "Usage ./nginstaller [install | uninstall]"
 		sys.exit()
 
 if len(sys.argv) == 1:
@@ -162,15 +163,12 @@ ssrcpath = currentdir + "/setuptools-5.7"
 
 apache_version = findapacheversion()
 
-nginxconfigure = """ ./configure --with-http_flv_module --with-ipv6 --with-http_mp4_module --with-pcre=%s/pcre-8.35 --add-module=../ngx_pagespeed  --sbin-path=/usr/local/sbin  --conf-path=/etc/nginx/nginx.conf  --pid-path=/var/run/nginx.pid  --error-log-path=/var/log/nginx/error.log  --http-log-path=/var/log/nginx/access.log  --with-http_realip_module  --with-http_ssl_module  --http-client-body-temp-path=/tmp/nginx_client  --http-proxy-temp-path=/tmp/nginx_proxy  --http-fastcgi-temp-path=/tmp/nginx_fastcgi  --with-http_stub_status_module > /dev/null 2>&1""" % (srcpath)
+nginxconfigure = """ ./configure --prefix=/etc/nginx --with-http_flv_module --with-ipv6 --with-http_mp4_module --with-pcre=%s/pcre-8.35 --with-openssl=../openssl-1.1.0h --with-zlib=../zlib-1.2.11 --add-module=../ngx_pagespeed --sbin-path=/usr/local/sbin  --conf-path=/etc/nginx/nginx.conf --pid-path=/var/run/nginx.pid  --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --with-file-aio --with-threads --with-poll_module --lock-path=/var/run/nginx.lock --buld=CloudLinux --builddir=nginx-1.14.0 --with-select_module --with-http_addition_module --with-http_image_filter_module=dynamic --with-http_dav_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_auth_request_module --with-http_random_index_module --with-http_secure_link_module --with-http_geoip_module=dynamic --with-http_sub_module --with-http_realip_module --with-http_v2_module --with-http_ssl_module  --http-client-body-temp-path=/tmp/nginx_client --http-proxy-temp-path=/tmp/nginx_proxy --with-http_degradation_module --with-http_slice_module --http-fastcgi-temp-path=/tmp/nginx_fastcgi  --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --with-mail=dynamic --with-mail_ssl_module --with-stream=dynamic --with-stream_ssl_module --with-stream_realip_module --with-stream_geoip_module=dynamic --with-pcre-jit --with-google_perftools_module --with-compat --user=nobody --group=nobody --with-http_stub_status_module > /dev/null 2>&1""" % (srcpath)
 
 print "Welcome to the Nginx Admin installer......Starting Install"
 print "Please Wait ......."
 
 proc = subprocess.Popen("mkdir -p /usr/local/cpanel/hooks/addondomain > /dev/null 2>&1", shell=True)
-output = proc.communicate()
-
-proc = subprocess.Popen("mkdir -p /var/ngx_pagespeed_cache > /dev/null 2>&1", shell=True)
 output = proc.communicate()
 
 proc = subprocess.Popen("cp /" + currentdir + "/addaddondomain /usr/local/cpanel/hooks/addondomain > /dev/null 2>&1", shell=True)
@@ -214,6 +212,11 @@ output = proc.communicate()
 proc = subprocess.Popen("cp /" + currentdir + "/createvhosts.py /scripts/createvhosts.py > /dev/null 2>&1", shell=True)
 output = proc.communicate()
 proc = subprocess.Popen("chmod +x /scripts/createvhosts.py > /dev/null 2>&1", shell=True)
+output = proc.communicate()
+
+proc = subprocess.Popen("cp /" + currentdir + "/createvhostsssl.py /scripts/createvhostsssl.py > /dev/null 2>&1", shell=True)
+output = proc.communicate()
+proc = subprocess.Popen("chmod +x /scripts/createvhostsssl.py > /dev/null 2>&1", shell=True)
 output = proc.communicate()
 
 proc = subprocess.Popen("cp /" + currentdir + "/rebuildvhosts /scripts/rebuildvhosts > /dev/null 2>&1", shell=True)
@@ -273,10 +276,8 @@ output = proc.communicate()
 proc = subprocess.Popen("chmod +x /scripts/postwwwacct", shell=True)
 output = proc.communicate()
 
-proc = subprocess.Popen("tar -zxf pcre-8.35.tar.gz > /dev/null 2>&1", shell=True, cwd=srcpath, stdout=None)
+proc = subprocess.Popen("tar -zxf pcre-8.42.tar.gz > /dev/null 2>&1", shell=True, cwd=srcpath, stdout=None)
 output = proc.communicate()
-#proc = subprocess.Popen("tar -zxf ngx_pagespeed.tar.gz > /dev/null 2>&1", shell=True, cwd=srcpath, stdout=None)
-#output = proc.communicate()
 proc = subprocess.Popen("tar -zxf nginx-1.14.0.tar.gz > /dev/null 2>&1", shell=True, cwd=srcpath, stdout=None)
 output = proc.communicate()
 proc = subprocess.Popen("chkconfig --add nginx", shell=True)
@@ -324,6 +325,10 @@ time.sleep(5)
 
 print "Generating vhosts..."
 proc = subprocess.Popen("/scripts/createvhosts.py", shell=True, stdout=None)
+output = proc.communicate()
+
+print "Generating ssl vhosts..."
+proc = subprocess.Popen("/scripts/createvhostsssl.py", shell=True, stdout=None)
 output = proc.communicate()
 
 print "Installing WHM interface..."

@@ -113,13 +113,13 @@ am__append_4 = libpcre.la
 #am__append_10 = $(GCOV_CFLAGS)
 ##am__append_11 = $(GCOV_CFLAGS)
 ##am__append_12 = $(GCOV_CFLAGS)
-#am__append_13 = pcre_jit_test
-#am__append_14 = pcre_jit_test
-#am__append_15 = libpcre.la
-##am__append_16 = libpcre16.la
-##am__append_17 = libpcre32.la
-##am__append_18 = $(GCOV_CFLAGS)
-##am__append_19 = $(GCOV_LIBS)
+am__append_13 = pcre_jit_test
+am__append_14 = pcre_jit_test
+am__append_15 = libpcre.la
+#am__append_16 = libpcre16.la
+#am__append_17 = libpcre32.la
+#am__append_18 = $(GCOV_CFLAGS)
+#am__append_19 = $(GCOV_LIBS)
 am__append_20 = libpcreposix.la
 #am__append_21 = $(GCOV_CFLAGS)
 am__append_22 = libpcrecpp.la
@@ -359,7 +359,7 @@ libpcreposix_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 am_libpcreposix_la_rpath = -rpath $(libdir)
 am__EXEEXT_1 = pcregrep$(EXEEXT)
 #am__EXEEXT_2 = dftables$(EXEEXT)
-#am__EXEEXT_3 = pcre_jit_test$(EXEEXT)
+am__EXEEXT_3 = pcre_jit_test$(EXEEXT)
 am__EXEEXT_4 = pcrecpp_unittest$(EXEEXT) \
 	pcre_scanner_unittest$(EXEEXT) \
 	pcre_stringpiece_unittest$(EXEEXT)
@@ -370,15 +370,15 @@ am__dftables_SOURCES_DIST = dftables.c
 dftables_OBJECTS = $(am_dftables_OBJECTS)
 dftables_LDADD = $(LDADD)
 am__pcre_jit_test_SOURCES_DIST = pcre_jit_test.c
-#am_pcre_jit_test_OBJECTS =  \
-#	pcre_jit_test-pcre_jit_test.$(OBJEXT)
+am_pcre_jit_test_OBJECTS =  \
+	pcre_jit_test-pcre_jit_test.$(OBJEXT)
 pcre_jit_test_OBJECTS = $(am_pcre_jit_test_OBJECTS)
 am__DEPENDENCIES_1 =
-##am__DEPENDENCIES_2 =  \
-##	$(am__DEPENDENCIES_1)
-#pcre_jit_test_DEPENDENCIES = $(am__append_15) \
-#	$(am__append_16) $(am__append_17) \
-#	$(am__DEPENDENCIES_2)
+#am__DEPENDENCIES_2 =  \
+#	$(am__DEPENDENCIES_1)
+pcre_jit_test_DEPENDENCIES = $(am__append_15) \
+	$(am__append_16) $(am__append_17) \
+	$(am__DEPENDENCIES_2)
 pcre_jit_test_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(pcre_jit_test_CFLAGS) \
 	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
@@ -750,7 +750,7 @@ AUTOMAKE = ${SHELL} /root/installer/publicnginx/pcre-8.35/missing automake-1.14
 AWK = gawk
 CC = cc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -O2 -fomit-frame-pointer -pipe 
+CFLAGS = -pthread -O2 -fomit-frame-pointer -pipe 
 CPP = cc -E
 CPPFLAGS = 
 CXX = g++
@@ -792,7 +792,7 @@ LDFLAGS =
 LIBBZ2 = 
 LIBOBJS = 
 LIBREADLINE = 
-LIBS = 
+LIBS =  
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIBZ = 
 LIPO = 
@@ -823,8 +823,8 @@ PCRE_STATIC_CFLAG = -DPCRE_STATIC
 PKG_CONFIG = 
 PKG_CONFIG_LIBDIR = 
 PKG_CONFIG_PATH = 
-PTHREAD_CC = 
-PTHREAD_CFLAGS = 
+PTHREAD_CC = cc
+PTHREAD_CFLAGS = -pthread
 PTHREAD_LIBS = 
 RANLIB = ranlib
 SED = /usr/bin/sed
@@ -1167,10 +1167,10 @@ nodist_libpcre_la_SOURCES = \
 libpcre_la_LDFLAGS = $(EXTRA_LIBPCRE_LDFLAGS)
 #libpcre16_la_LDFLAGS = $(EXTRA_LIBPCRE16_LDFLAGS)
 #libpcre32_la_LDFLAGS = $(EXTRA_LIBPCRE32_LDFLAGS)
-#pcre_jit_test_SOURCES = pcre_jit_test.c
-#pcre_jit_test_CFLAGS = $(AM_CFLAGS) $(am__append_18)
-#pcre_jit_test_LDADD = $(am__append_15) $(am__append_16) \
-#	$(am__append_17) $(am__append_19)
+pcre_jit_test_SOURCES = pcre_jit_test.c
+pcre_jit_test_CFLAGS = $(AM_CFLAGS) $(am__append_18)
+pcre_jit_test_LDADD = $(am__append_15) $(am__append_16) \
+	$(am__append_17) $(am__append_19)
 libpcreposix_la_SOURCES = \
   pcreposix.c
 
